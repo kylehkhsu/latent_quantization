@@ -1,0 +1,45 @@
+defaults:
+  - model_partial: quantized_ae
+  - encoder_partial: image
+  - decoder_partial: style_image
+  - override hydra/launcher: slurm
+  - _self_
+
+hydra:
+  callbacks:
+    log_job_return:
+      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+  job:
+    chdir: True
+
+experiment:
+  seed: 42
+
+load:
+  run_path: kylehsu/disentangle/xt45rj7r  # CHANGE ME
+  step: 99999                             # CHANGE ME
+
+model_partial:
+  encoder_partial: ${encoder_partial}
+  decoder_partial: ${decoder_partial}
+  latent_partial:
+    num_latents: twice_sources
+
+
+data:
+  name: isaac3d
+  num_val_data: 10000
+  seed: 20230228
+  possible_dirs:    # CHANGE ME; tried in order
+    - /scr-ssd/kylehsu/data
+    - /scr/kylehsu/data
+    - /iris/u/kylehsu/data
+  batch_size: 128
+
+wandb:
+  project: disentangle
+  name: null
+  group: null
+  job_type: visualize
+
+debug: False

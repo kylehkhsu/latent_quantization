@@ -1,0 +1,136 @@
+#defaults:
+#  - model_partial: global_quantized_ae
+#  - encoder_partial: image
+#  - decoder_partial: style_image
+#  - override hydra/launcher: slurm
+#  - _self_
+#
+#hydra:
+#  callbacks:
+#    log_job_return:
+#      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+#  job:
+#    chdir: True
+#
+#experiment:
+#  seed: 42
+#
+#load:
+#  run_path: kylehsu/disentangle/x160mitr
+#  step: 99999
+#
+#model_partial:
+#  encoder_partial: ${encoder_partial}
+#  decoder_partial: ${decoder_partial}
+#  latent_partial:
+#    num_latents: twice_sources
+#    num_values: 10
+#
+#data:
+#  name: shapes3d
+#  num_val_data: 10000
+#  seed: 20230228
+#  possible_dirs:    # tried in order
+#    - /scr-ssd/kylehsu/data
+#    - /scr/kylehsu/data
+#    - /iris/u/kylehsu/data
+#  batch_size: 128
+#
+#wandb:
+#  project: disentangle
+#  name: null
+#  group: null
+#  job_type: visualize
+#
+#debug: False
+
+#defaults:
+#  - model_partial: tcvae
+#  - encoder_partial: image
+#  - decoder_partial: style_image
+#  - override hydra/launcher: slurm
+#  - _self_
+#
+#hydra:
+#  callbacks:
+#    log_job_return:
+#      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+#  job:
+#    chdir: True
+#
+#experiment:
+#  seed: 42
+#
+#load:
+#  run_path: kylehsu/disentangle/evu6q1e6
+#  step: 99999
+#
+#model_partial:
+#  encoder_partial: ${encoder_partial}
+#  decoder_partial: ${decoder_partial}
+#  latent_partial:
+#    num_latents: twice_sources
+#
+#data:
+#  name: shapes3d
+#  num_val_data: 10000
+#  seed: 20230228
+#  possible_dirs:    # tried in order
+#    - /scr-ssd/kylehsu/data
+#    - /scr/kylehsu/data
+#    - /iris/u/kylehsu/data
+#  batch_size: 128
+#
+#wandb:
+#  project: disentangle
+#  name: null
+#  group: null
+#  job_type: visualize
+#
+#debug: False
+
+
+defaults:
+  - model_partial: ae
+  - encoder_partial: image
+  - decoder_partial: style_image
+  - override hydra/launcher: slurm
+  - _self_
+
+hydra:
+  callbacks:
+    log_job_return:
+      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+  job:
+    chdir: True
+
+experiment:
+  seed: 42
+
+load:
+  run_path: kylehsu/disentangle/9r2ssoam  # CHANGE ME
+  step: 99999                             # CHANGE ME
+
+model_partial:
+  encoder_partial: ${encoder_partial}
+  decoder_partial: ${decoder_partial}
+  latent_partial:
+    num_latents: twice_sources
+
+data:
+  name: shapes3d
+  num_val_data: 10000
+  seed: 20230228
+  possible_dirs:    # CHANGE ME; tried in order
+    - /scr-ssd/kylehsu/data
+    - /scr/kylehsu/data
+    - /iris/u/kylehsu/data
+  batch_size: 128
+
+wandb:
+  project: disentangle
+  name: null
+  group: null
+  job_type: visualize
+
+debug: False

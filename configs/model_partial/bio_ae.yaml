@@ -1,0 +1,14 @@
+_partial_: True
+_target_: disentangle.models.BioAE
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.ContinuousLatent
+  num_latents: ???
+decoder_partial: ???
+lambdas:
+  binary_cross_entropy: 1.
+  nonnegative: 1.
+  activity: 0.1
+  l2: 1e-4
+

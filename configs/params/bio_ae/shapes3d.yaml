@@ -1,0 +1,9 @@
+params:
+  model_partial: bio_ae
+  encoder_partial: image
+  decoder_partial: style_image
+  data.name: shapes3d
+  model_partial.latent_partial.num_latents: twice_sources
+  model_partial.lambdas.activity: 1e-2
+  experiment.seed: 101
+  optim.num_steps: 2e5

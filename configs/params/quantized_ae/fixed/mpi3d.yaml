@@ -1,0 +1,4 @@
+lambdas:
+  commitment: 0.25
+  quantization: 1
+  l2: 0.1

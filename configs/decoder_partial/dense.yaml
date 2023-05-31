@@ -1,0 +1,9 @@
+_partial_: True
+_target_: disentangle.decoders.DenseDecoder
+dense_partial:
+  _partial_: True
+  _target_: disentangle.blocks.DenseBlocks
+  widths: [2048, 2048, 2048, 2048]
+  activation: relu
+  norm: layer_norm
+

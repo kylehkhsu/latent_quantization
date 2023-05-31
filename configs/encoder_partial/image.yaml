@@ -1,0 +1,17 @@
+_partial_: True
+_target_: disentangle.encoders.ImageEncoder
+conv_partial:
+  _partial_: True
+  _target_: disentangle.blocks.Conv2DBlocks
+  widths: [ 32, 32, 32, 64, 64, 64, 128, 128, 128, 256, 256, 256]
+  kernel_sizes: [3, 3, 4, 3, 3, 4, 3, 3, 4, 3, 3, 4 ]
+  strides: [ 1, 1, 2, 1, 1, 2, 1, 1, 2, 1, 1, 2 ]
+  paddings: [ 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ]
+  activation: leaky_relu
+  norm: instance_norm
+dense_partial:
+  _partial_: True
+  _target_: disentangle.blocks.DenseBlocks
+  widths: [ 256, 256 ]
+  activation: relu
+  norm: none

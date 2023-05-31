@@ -1,0 +1,19 @@
+_partial_: True
+_target_: disentangle.models.QuantizedAE
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.QuantizedLatent
+  num_latents: 12
+  num_values_per_latent: 10
+  optimize_values: True
+decoder_partial: ???
+lambdas:
+  binary_cross_entropy: 1.
+  quantization: 0.001
+  commitment: 0.001
+  l2: 0.1  # adamw
+  l1: 0.
+anneal: False
+anneal_duration: 10000
+delay_weight_decay: False

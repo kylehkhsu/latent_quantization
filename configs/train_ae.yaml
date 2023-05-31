@@ -1,0 +1,80 @@
+defaults:
+  - model_partial: quantized_ae
+  - encoder_partial: image
+  - decoder_partial: style_image
+  - override hydra/launcher: slurm
+  - _self_
+
+hydra:
+  callbacks:
+    log_job_return:
+      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+  job:
+    chdir: True
+  sweeper:    # only invoked if --multirun is used, e.g. `python launchers/train_ae.py --multirun`
+#    params:
+#      model_partial: quantized_ae
+#      encoder_partial: image
+#      decoder_partial: style_image
+#      data.name: shapes3d, mpi3d, falcor3d, isaac3d
+#      model_partial.latent_partial.num_latents: twice_sources
+#      model_partial.latent_partial.num_values: 10
+#      model_partial.lambdas.quantization: 0.01
+#      model_partial.lambdas.commitment: 0.01
+#      model_partial.lambdas.l2: 0.1
+#      model_partial.lambdas.l1: 0.
+#      model_partial.delay_weight_decay: False
+#      model_partial.anneal: False
+#      experiment.seed: 42,43,44
+#      optim.num_steps: 2e5
+    params:
+      model_partial: quantized_ae
+      encoder_partial: image
+      decoder_partial: style_image
+      data.name: shapes3d
+      model_partial.latent_partial.num_latents: twice_sources
+      model_partial.latent_partial.num_values: 10
+      model_partial.lambdas.quantization: 0.01
+      model_partial.lambdas.commitment: 0.01
+      model_partial.lambdas.l2: 0.1
+      model_partial.lambdas.l1: 0.
+      experiment.seed: 42
+      optim.num_steps: 2e5
+
+experiment:
+  seed: 100
+
+optim:
+  learning_rate: 1e-3
+  num_steps: 2e5
+  clip: 1.
+
+model_partial:
+  encoder_partial: ${encoder_partial}
+  decoder_partial: ${decoder_partial}
+  latent_partial:
+    num_latents: twice_sources
+
+data:
+  name: shapes3d
+  num_val_data: 10000
+  seed: 20230228
+  possible_dirs:    # CHANGE ME; tried in order
+    - /scr-ssd/kylehsu/data
+    - /scr/kylehsu/data
+    - /iris/u/kylehsu/data
+  batch_size: 128
+
+wandb:
+  project: disentangle
+  name: null
+  group: null
+  job_type: null
+
+debug: False
+
+eval:
+  period: 5e3
+
+checkpoint:
+  period: ${eval.period}

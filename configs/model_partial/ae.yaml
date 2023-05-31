@@ -1,0 +1,11 @@
+_partial_: True
+_target_: disentangle.models.AE
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.ContinuousLatent
+  num_latents: ???
+decoder_partial: ???
+lambdas:
+  binary_cross_entropy: 1.
+  l2: 0.

@@ -1,0 +1,15 @@
+_partial_: True
+_target_: disentangle.models.TCVAE
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.DiagonalGaussianLatent
+  num_latents: ???
+decoder_partial: ???
+lambdas:
+  binary_cross_entropy: 1
+  mutual_information: 1
+  total_correlation: 1
+  dimension_wise_kl: 1
+anneal: False
+anneal_duration: 10000

@@ -1,0 +1,68 @@
+defaults:
+  - model_partial: quantized_info_gan
+  - encoder_partial: image
+  - decoder_partial: style_image
+  - override hydra/launcher: slurm
+  - _self_
+
+hydra:
+  callbacks:
+    log_job_return:
+      _target_: hydra.experimental.callbacks.LogJobReturnCallback
+  job:
+    chdir: True
+  sweeper:
+    params:
+      model_partial: quantized_info_gan
+      encoder_partial: image
+      decoder_partial: style_image
+      data.name: shapes3d, mpi3d, falcor3d, isaac3d
+      model_partial.latent_partial.num_latents: twice_sources
+      model_partial.latent_partial.optimize_values: True
+      model_partial.lambdas.commitment: 1e-2
+      model_partial.lambdas.quantization: 1e-2
+      model_partial.lambdas.l2: 1e-3
+      model_partial.lambdas.latent: 200
+      experiment.seed: 53,54,55
+      optim.num_steps: 2e5
+
+experiment:
+  seed: 42
+
+optim:
+  learning_rate: 2e-4
+  beta1: 0.
+  beta2: 0.9
+  num_steps: 1e5
+  clip: 1.
+  generator_step_period: 5
+
+model_partial:
+  encoder_partial: ${encoder_partial}
+  decoder_partial: ${decoder_partial}
+  latent_partial:
+    num_latents: twice_sources
+
+data:
+  name: shapes3d
+  num_val_data: 10000
+  seed: 20230228
+  possible_dirs:    # tried in order
+    - /scr-ssd/kylehsu/data
+    - /scr/kylehsu/data
+    - /iris/u/kylehsu/data
+  batch_size: 64
+
+wandb:
+  project: disentangle
+  name: null
+  group: null
+  job_type: null
+
+debug: False
+
+eval:
+  period: 5e3
+
+checkpoint:
+  period: ${eval.period}

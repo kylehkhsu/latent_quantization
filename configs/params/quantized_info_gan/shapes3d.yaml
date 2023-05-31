@@ -1,0 +1,13 @@
+params:
+  model_partial: quantized_info_gan
+  encoder_partial: image
+  decoder_partial: style_image
+  data.name: shapes3d
+  model_partial.latent_partial.num_latents: twice_sources
+  model_partial.latent_partial.optimize_values: True
+  model_partial.lambdas.commitment: 1e-2
+  model_partial.lambdas.quantization: 1e-2
+  model_partial.lambdas.l2: 1e-3
+  model_partial.lambdas.latent: 200
+  experiment.seed: 53
+  optim.num_steps: 2e5

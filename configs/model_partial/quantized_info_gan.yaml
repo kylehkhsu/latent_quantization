@@ -1,0 +1,17 @@
+_partial_: True
+_target_: disentangle.models.QuantizedInfoGAN
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.QuantizedLatent
+  num_latents: ???
+  num_values_per_latent: 10
+  optimize_values: True
+decoder_partial: ???
+lambdas:
+  gradient: 10
+  latent: 200
+  value: 1
+  l2: 1e-4
+  quantization: 1e-2
+  commitment: 1e-2

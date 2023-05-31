@@ -1,0 +1,13 @@
+_partial_: True
+_target_: disentangle.models.InfoGAN
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.UniformLatent
+  num_latents: ???
+decoder_partial: ???
+lambdas:
+  gradient: 10
+  latent: 200
+  value: 1
+  l2: 1e-4

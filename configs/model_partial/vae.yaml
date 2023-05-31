@@ -1,0 +1,13 @@
+_partial_: True
+_target_: disentangle.models.VAE
+encoder_partial: ???
+latent_partial:
+  _partial_: True
+  _target_: disentangle.latents.DiagonalGaussianLatent
+  num_latents: ???
+decoder_partial: ???
+lambdas:
+  binary_cross_entropy: 1
+  kl: 1
+anneal: False
+anneal_duration: 10000
