@@ -10,7 +10,7 @@ latent_partial:
 decoder_partial: ???
 lambdas:
   binary_cross_entropy: 1.
-  quantization: 1.
-  commitment: 0.001
+  quantization: 0.01
+  commitment: 0.01
   l2: 0.1  # adamw
   l1: 0.
