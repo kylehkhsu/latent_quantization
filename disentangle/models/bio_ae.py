@@ -3,10 +3,10 @@ import jax.numpy as jnp
 import equinox as eqx
 
 import disentangle
-from . import rae
+from . import ae
 
 
-class BioAE(rae.RAE):
+class BioAE(ae.AE):
 
     @staticmethod
     def nonnegative_loss(z_hat):
