@@ -5,7 +5,7 @@ latent_partial:
   _partial_: True
   _target_: disentangle.latents.GlobalQuantizedLatent
   num_latents: ???
-  num_values: 10
+  num_values_per_latent 10
 decoder_partial: ???
 lambdas:
   binary_cross_entropy: 1.
