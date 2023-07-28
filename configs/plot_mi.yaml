@@ -24,7 +24,7 @@
 #  decoder_partial: ${decoder_partial}
 #  latent_partial:
 #    num_latents: twice_sources
-#    num_values: 10
+#    num_values_per_latent 10
 #
 #data:
 #  name: shapes3d

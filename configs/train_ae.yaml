@@ -18,7 +18,7 @@ hydra:
 #      decoder_partial: style_image
 #      data.name: shapes3d, mpi3d, falcor3d, isaac3d
 #      model_partial.latent_partial.num_latents: twice_sources
-#      model_partial.latent_partial.num_values: 10
+#      model_partial.latent_partial.num_values_per_latent 10
 #      model_partial.lambdas.quantization: 0.01
 #      model_partial.lambdas.commitment: 0.01
 #      model_partial.lambdas.l2: 0.1
@@ -33,7 +33,7 @@ hydra:
       decoder_partial: style_image
       data.name: shapes3d
       model_partial.latent_partial.num_latents: twice_sources
-      model_partial.latent_partial.num_values: 10
+      model_partial.latent_partial.num_values_per_latent 10
       model_partial.lambdas.quantization: 0.01
       model_partial.lambdas.commitment: 0.01
       model_partial.lambdas.l2: 0.1
