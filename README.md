@@ -10,24 +10,55 @@ It uses:
 The code separates [encoder architecture](./disentangle/encoders), [decoder architecture](./disentangle/decoders), [latent space design](./disentangle/latents), and [model objectives](./disentangle/models) into modular components. 
 These are combined via Hydra's [partial object instantiation functionality](https://hydra.cc/docs/advanced/instantiate_objects/overview/#partial-instantiation) via the `*_partial` options in configuration files. See [below](#example) for an example.
 
+We also provide a [standalone file](./disentangle/metrics/infomec.py) for InfoMEC estimation for easy integration into other projects.
+
 # Installation
 
 ```
 conda create -n disentangle python=3.10 -y && conda activate disentangle
-conda install c-compiler cxx-compiler jax cuda-nvcc -c conda-forge -c nvidia -y
 git clone --recurse-submodules https://github.com/kylehkhsu/disentangle.git
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/ pip install -r requirements.txt
+pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+pip install -r requirements.txt
 pip install -e .
 ```
 
-Alternatives for JAX installation can be found here: https://github.com/google/jax#installation.
-For example:
+## Add environment variables to `conda activate`
 ```
-pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+mkdir -p $CONDA_PREFIX/etc/conda/activate.d
+echo 'CUDNN_PATH=$(dirname $(python -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)"))' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/:$CUDNN_PATH/lib:$LD_LIBRARY_PATH' >> $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
 ```
 
+[//]: # ()
+[//]: # ()
+[//]: # (```)
 
-`LD_LIBRARY_PATH` command is to ensure `tensorflow` installation "sees" the `cudatoolkit` and `cudnn` packages installed via `conda`.
+[//]: # (conda create -n disentangle python=3.10 -y && conda activate disentangle)
+
+[//]: # (conda install c-compiler cxx-compiler jax cuda-nvcc -c conda-forge -c nvidia -y)
+
+[//]: # (git clone --recurse-submodules https://github.com/kylehkhsu/disentangle.git)
+
+[//]: # (LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/ pip install -r requirements.txt)
+
+[//]: # (pip install -e .)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # (Alternatives for JAX installation can be found here: https://github.com/google/jax#installation.)
+
+[//]: # (For example:)
+
+[//]: # (```)
+
+[//]: # (pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html)
+
+[//]: # (```)
+
+[//]: # ()
+[//]: # ()
+[//]: # (`LD_LIBRARY_PATH` command is to ensure `tensorflow` installation "sees" the `cudatoolkit` and `cudnn` packages installed via `conda`.)
 
 
 [Datasets](./disentangle/datasets) will be installed via the TensorFlow Datasets API on first use.
@@ -48,10 +79,11 @@ To train an autoencoder variant, do `python launchers/train_ae.py`. This will us
 
 To run a sweep, add the `--multirun` flag. The sweep will run over all combinations of configurations specified in `hydra.sweeper.params` in the config file. 
 
-By default, using `--multirun` will invoke the SubmitIt launcher, which submits jobs to a Slurm cluster. Configure this [here](./configs/hydra/launcher/slurm.yaml). To instead run locally, add `hydra/launcher=local` to the command.
+By default, using `--multirun` will invoke the SubmitIt launcher, which submits jobs to a Slurm cluster. Configure this [here](./configs/hydra/launcher/slurm.yaml). To instead run locally, add `hydra/launcher=submitit_local` to the command.
 
 # InfoMEC estimation
-A methodological contribution of our paper is a cohesively information-theoretic framework for disentanglement evaluation based on three complementary metrics: InfoM (modularity), InfoE (explicitness), and InfoC (compactness).
+A methodological contribution of our paper is a cohesively information-theoretic framework for disentanglement evaluation based on three complementary metrics: InfoM (modularity), InfoE (explicitness), and InfoC (compactness). See [here](./disentangle/metrics/infomec.py) for a standalone implementation that can be copied by itself into other projects.
+
 
 ### Modularity and Compactness
 [This file](./disentangle/metrics/mutual_information.py) contains code for InfoM and InfoC estimation. 
