@@ -101,10 +101,10 @@ InfoE involves calculating the predictive linear information from the latents to
 # Citation
 If you find this code useful for your work, please cite:
 ```
-@article{hsu2023disentanglement,
+@inproceedings{hsu2023disentanglement,
   title={Disentanglement via Latent Quantization},
   author={Hsu, Kyle and Dorrell, Will and Whittington, James C. R. and Wu, Jiajun and Finn, Chelsea},
-  journal={arXiv preprint arXiv:2305.18378},
+  booktitle={Neural Information Processing Systems},
   year={2023}
 }
 ```
