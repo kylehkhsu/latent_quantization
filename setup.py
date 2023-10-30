@@ -14,7 +14,7 @@ def read_requirements_file(filename):
         return [line.strip() for line in f]
 
 
-description = 'Disentangled representation learning.'
+description = 'Disentangled representation learning with latent quantization.'
 
 install_requires = read_requirements_file('requirements.txt')
 
@@ -24,7 +24,7 @@ setup(
     description=description,
     long_description=long_description,
     long_description_content_type='text/markdown',
-    url='https://github.com/kylehkhsu/disentangle',
+    url='https://github.com/kylehkhsu/latent_quantization',
     author='Kyle Hsu',
     keywords='machine, learning, research',
     packages=find_packages(),
