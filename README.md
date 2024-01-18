@@ -15,8 +15,8 @@ We also provide a [standalone file](./disentangle/metrics/infomec.py) for InfoME
 # Installation
 
 ```
-conda create -n disentangle python=3.10 -y && conda activate disentangle
-git clone --recurse-submodules https://github.com/kylehkhsu/disentangle.git
+conda create -n latent_quantization python=3.10 -y && conda activate latent_quantization
+git clone --recurse-submodules https://github.com/kylehkhsu/latent_quantization.git
 pip install --upgrade "jax[cuda11_pip]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 pip install -r requirements.txt
 pip install -e .
