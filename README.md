@@ -33,11 +33,11 @@ echo 'export LD_LIBRARY_PATH=$CONDA_PREFIX/lib/:$CUDNN_PATH/lib:$LD_LIBRARY_PATH
 [//]: # ()
 [//]: # (```)
 
-[//]: # (conda create -n disentangle python=3.10 -y && conda activate disentangle)
+[//]: # (conda create -n latent_quantization python=3.10 -y && conda activate latent_quantization)
 
 [//]: # (conda install c-compiler cxx-compiler jax cuda-nvcc -c conda-forge -c nvidia -y)
 
-[//]: # (git clone --recurse-submodules https://github.com/kylehkhsu/disentangle.git)
+[//]: # (git clone --recurse-submodules https://github.com/kylehkhsu/latent_quantization.git)
 
 [//]: # (LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$CONDA_PREFIX/lib/ pip install -r requirements.txt)
 
